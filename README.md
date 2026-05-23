@@ -1,6 +1,6 @@
 # Hermes Beszel Plugin
 
-**Beszel monitoring hub integration for Hermes Agent.** Query systems, metrics, alerts, and SMART disk data via the PocketBase API. Configurable hub URL with push webhook alerts through Shoutrrr.
+**Beszel monitoring hub integration for Hermes Agent.** Query systems, metrics, alerts, and SMART disk data via the PocketBase API. Push webhook alerts through Shoutrrr with a configurable hub URL.
 
 - **Author:** okazakee
 - **Version:** 1.0.0
@@ -9,7 +9,7 @@
 
 ## Features
 
-- **5 query tools** registered with the Hermes agent:
+- **5 query tools** registered with Hermes:
   - `beszel_setup` - Interactive CLI setup wizard for hub URL, auth, webhook, and alerts
   - `beszel_list_systems` - List all monitored systems with live status
   - `beszel_metrics` - Detailed live metrics for a specific system (CPU, RAM, disk, network, temps)
@@ -72,7 +72,7 @@ hermes beszel setup
 
 The wizard will ask for:
 
-1. **Beszel Hub URL** - e.g. `https://beszel.okazakee.dev` (reverse proxy), `http://10.0.0.1:8090` (local network), `http://localhost:8090` (same machine)
+1. **Beszel Hub URL** - e.g., `https://beszel.okazakee.dev` (reverse proxy), `http://10.0.0.1:8090` (local network), `http://localhost:8090` (same machine)
 2. **Admin Email** - your Beszel admin email
 3. **Admin Password** - your Beszel admin password (input hidden, never stored)
 
@@ -96,7 +96,7 @@ Once the plugin is enabled and configured, you can ask Hermes on Telegram:
 
 The agent will call the appropriate tools automatically.
 
-### Via CLI
+### CLI Commands
 
 ```bash
 # Run interactive setup
@@ -144,13 +144,13 @@ Configuration is stored in `~/.hermes/plugins/beszel/config.json`:
 
 ## Security
 
-- **No credentials stored on disk.** Email and password are requested via CLI stdin during setup, used once to obtain a JWT token, then immediately discarded
-- **JWT-only auth** - only the Bearer token and API URL are persisted in `config.json`
-- **Revocable** - changing the admin password on Beszel invalidates the stored token
-- **HMAC webhook auth** - Shoutrrr webhook uses a random 48-character hex secret
-- **Local-only webhook traffic** - Shoutrrr URL uses the Docker bridge gateway IP; traffic never leaves the machine
-- **No external dependencies** - uses only Python stdlib, minimizing supply-chain risk
-- **Interactive-only credential input** - `beszel_setup` rejects non-TTY calls (e.g. from Telegram/cron), redirecting users to the CLI
+- **Credentials never stored on disk.** Email and password are requested via CLI stdin during setup, used once to obtain a JWT token, then immediately discarded.
+- **JWT-only authentication:** only the Bearer token and API URL are persisted in `config.json`.
+- **Easily revocable:** changing the admin password on Beszel invalidates the stored token.
+- **HMAC webhook authentication:** Shoutrrr webhook uses a random 48-character hex secret.
+- **Local-only webhook traffic:** Shoutrrr URL uses the Docker bridge gateway IP; traffic never leaves the machine.
+- **No external dependencies:** uses only Python stdlib, minimizing supply-chain risk.
+- **Interactive-only credential input:** `beszel_setup` rejects non-TTY calls (e.g., from Telegram/cron), redirecting users to the CLI.
 
 ## Files
 
@@ -159,7 +159,7 @@ hermes-beszel-plugin/
 ├── plugins/
 │   └── beszel/
 │       ├── plugin.yaml         # Manifest (name, version, description, author)
-│       ├── __init__.py         # register(ctx) — tool + CLI registration
+│       ├── __init__.py         # register(ctx): tool + CLI registration
 │       ├── client.py           # PocketBase API HTTP client (auth, systems, alerts, SMART)
 │       ├── tools.py            # Tool schemas + handlers (Telegram-formatted output)
 │       └── setup.py            # Interactive setup wizard (auth, webhook, alert rules)
@@ -172,7 +172,7 @@ hermes-beszel-plugin/
 
 ## Contributing
 
-Contributions welcome! Please open an issue or PR on GitHub.
+Contributions are welcome! Please open an issue or PR on GitHub.
 
 ## License
 
