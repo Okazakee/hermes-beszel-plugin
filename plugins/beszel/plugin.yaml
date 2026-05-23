@@ -1,0 +1,6 @@
+name: beszel
+version: "1.0.0"
+description: "Beszel monitoring hub integration — query systems, metrics, alerts, and SMART disk data via the PocketBase API. Configurable hub URL, push webhook alerts via Shoutrrr."
+author: okazakee
+kind: backend
+requires_env: []
