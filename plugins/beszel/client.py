@@ -294,5 +294,5 @@ def get_agent_key(
 ) -> dict:
     """Generate a new agent key for adding a system."""
     url = get_api_url(api_url)
-    req = _build_request("POST", "/api/beszel/getkey", url)
+    req = _build_request("GET", "/api/beszel/getkey", url)
     return _fetch(req, timeout=15)
